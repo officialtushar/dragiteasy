@@ -1,5 +1,7 @@
 {
   "name": "dragiteasy",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
