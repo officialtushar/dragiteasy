@@ -1,46 +1,56 @@
-import { Component } from '@angular/core';
-import { DragulaService } from 'ng2-dragula';
-import { ToastController } from '@ionic/angular';
+import { Component , OnInit } from "@angular/core";
+import { DragulaService } from "ng2-dragula";
+import { ToastController } from "@ionic/angular";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"]
 })
-export class HomePage {
-
-
+export class HomePage implements OnInit{
   q1 = [
-    { value: 'Buy Milk', color: 'primary' },
-    { value: 'Write new Post', color: 'primary' }
+    { value: "Buy Milk", color: "primary" },
+    { value: "Write new Post", color: "primary" }
   ];
   q2 = [
-    { value: 'Schedule newsletter', color: 'secondary' },
-    { value: 'Find new Ionic Academy topics', color: 'secondary' }
+    { value: "Schedule newsletter", color: "secondary" },
+    { value: "Find new Ionic Academy topics", color: "secondary" }
   ];
   q3 = [
-    { value: 'Improve page performance', color: 'tertiary' },
-    { value: 'Clean the house', color: 'tertiary' }
+    { value: "Improve page performance", color: "tertiary" },
+    { value: "Clean the house", color: "tertiary" }
   ];
   q4 = [
-    { value: 'Unimportant things', color: 'warning' },
-    { value: 'Watch Netflix', color: 'warning' }
+    { value: "Unimportant things", color: "warning" },
+    { value: "Watch Netflix", color: "warning" }
   ];
 
+  todo = { value: "", color: "" };
+  selectedQuadrant = "q1";
 
-  todo = { value: '', color: '' };
-  selectedQuadrant = 'q1';
-  orderableLists = [['Item 1a', 'Item 2a', 'Item 3a'], ['Item 1b', 'Item 2b', 'Item 3b']];
+  constructor(
+    private dragulaService: DragulaService,
+    private toastController: ToastController
+  ) {
+
+  }
 
 
-  constructor(private dragulaService: DragulaService, private toastController: ToastController) {
+  ngOnInit() {
 
-    this.dragulaService.drag('bag')
+
+    const bag: any = this.dragulaService.find('dragit-bag');
+    if (bag !== undefined ) this.dragulaService.destroy('dragit-bag');
+
+    console.log('bag',bag);
+    
+
+    this.dragulaService.drag(bag)
     .subscribe(({ name, el, source }) => {
       el.setAttribute('color', 'danger');
     });
  
-    this.dragulaService.removeModel('bag')
+    this.dragulaService.removeModel(bag)
     .subscribe(({ item }) => {
       this.toastController.create({
         message: 'Removed: ' + item.value,
@@ -48,39 +58,32 @@ export class HomePage {
       }).then(toast => toast.present());
     });
  
-    this.dragulaService.dropModel('bag')
+    this.dragulaService.dropModel(bag)
       .subscribe(({ item }) => {
         item['color'] = 'success';
       });
  
-    this.dragulaService.createGroup('bag', {
-      removeOnSpill: true
-    });
-
-
-    
-
+    // this.dragulaService.createGroup(bag, {
+    //   removeOnSpill: true
+    // });
   }
 
   addTodo() {
     switch (this.selectedQuadrant) {
-      case 'q1':
-        this.todo.color = 'primary';
+      case "q1":
+        this.todo.color = "primary";
         break;
-      case 'q2':
-        this.todo.color = 'secondary';
+      case "q2":
+        this.todo.color = "secondary";
         break;
-      case 'q3':
-        this.todo.color = 'tertiary';
+      case "q3":
+        this.todo.color = "tertiary";
         break;
-      case 'q4':
-        this.todo.color = 'warning';
+      case "q4":
+        this.todo.color = "warning";
         break;
     }
     this[this.selectedQuadrant].push(this.todo);
-    this.todo = { value: '', color: '' };
+    this.todo = { value: "", color: "" };
   }
-
-
-
 }
