@@ -39,11 +39,11 @@ export class HomePage implements OnInit{
   ngOnInit() {
 
 
-    const bag: any = this.dragulaService.find('dragit-bag');
-    if (bag !== undefined ) this.dragulaService.destroy('dragit-bag');
+    // const bag: any = this.dragulaService.find('dragit-bag');
+    // if (bag !== undefined ) this.dragulaService.destroy('dragit-bag');
 
-    console.log('bag',bag);
-    
+    // console.log('bag',bag);
+    const bag = 'dragit-bag';
 
     this.dragulaService.drag(bag)
     .subscribe(({ name, el, source }) => {
@@ -63,9 +63,9 @@ export class HomePage implements OnInit{
         item['color'] = 'success';
       });
  
-    // this.dragulaService.createGroup(bag, {
-    //   removeOnSpill: true
-    // });
+    this.dragulaService.createGroup(bag, {
+      removeOnSpill: true
+    });
   }
 
   addTodo() {

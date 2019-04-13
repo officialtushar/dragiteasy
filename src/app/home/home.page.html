@@ -44,7 +44,7 @@
     <ion-row no-padding class="matrix">
       <ion-col size="6" class="q1">
         <div class="q-header">Do</div>
-        <ion-list dragula="dragit-baf" [(dragulaModel)]="q1" lines="none">
+        <ion-list dragula="dragit-bag" [(dragulaModel)]="q1" lines="none">
           <ion-item *ngFor="let item of q1" [color]="item.color" expand="block" text-wrap>
             {{ item.value }}
           </ion-item>
@@ -53,7 +53,7 @@
  
       <ion-col size="6" class="q2">
         <div class="q-header">Schedule</div>
-        <ion-list dragula="dragit-baf" [(dragulaModel)]="q2" lines="none">
+        <ion-list dragula="dragit-bag" [(dragulaModel)]="q2" lines="none">
           <ion-item *ngFor="let item of q2" [color]="item.color" expand="block" text-wrap>
             {{ item.value }}
           </ion-item>
@@ -62,7 +62,7 @@
  
       <ion-col size="6" class="q3">
         <div class="q-header">Delegate</div>
-        <ion-list dragula="dragit-baf" [(dragulaModel)]="q3" lines="none">
+        <ion-list dragula="dragit-bag" [(dragulaModel)]="q3" lines="none">
           <ion-item *ngFor="let item of q3" [color]="item.color" expand="block" text-wrap>
             {{ item.value }}
           </ion-item>
@@ -71,7 +71,7 @@
  
       <ion-col size="6" class="q4">
         <div class="q-header">Don't do</div>
-        <ion-list dragula="dragit-baf" [(dragulaModel)]="q4" lines="none">
+        <ion-list dragula="dragit-bag" [(dragulaModel)]="q4" lines="none">
           <ion-item *ngFor="let item of q4" [color]="item.color" expand="block" text-wrap>
             {{ item.value }}
           </ion-item>
